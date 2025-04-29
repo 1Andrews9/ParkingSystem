@@ -1,0 +1,62 @@
+Se debe de ingresar a través del terminal o CMD a la carpeta de parkingSystem para iniciar la ejecución de las pruebas.
+1. Iniciar la aplicación Spring Boot (desde la terminal de la raíz del proyecto):
+Bash
+
+./mvnw spring-boot:run
+
+Autorization: credenciales como basic auth: admin y admin123
+
+
+
+2. Crear un nuevo parqueadero:
+	
+Método: 	POST	
+URL: 		http://localhost:8080/api/parking-lots
+		
+	Cuerpo (ejemplo en JSON para Postman):JSON
+
+HEADERS
+KEY				VALUE
+	Content-Type		application/json
+
+BODY como: raw
+
+{
+    "name": "Mi Nuevo Parqueadero",
+    "capacity": 10
+}  
+3. Registrar la entrada de un vehículo:
+
+Método: 	POST
+URL:		 http://localhost:8080/api/vehicles/entry/{parkingLotId} 		
+
+(reemplaza {parkingLotId} con el ID del parqueadero al que entra el vehículo, por ejemplo, 1)
+
+Cuerpo (ejemplo en JSON para Postman):JSON
+
+{
+    "licensePlate": "XYZ-987",
+    "type": "Carro"
+}
+	   
+4. Registrar la salida de un vehículo:
+Método: 	POST
+URL: 		http://localhost:8080/api/vehicles/exit/{vehicleId} 		(reemplaza {vehicleId} con el ID del vehículo que sale, por ejemplo, 1)
+
+Cuerpo: Vacío
+
+5. Obtener el reporte de ocupación:
+Método: 	GET
+URL: 		http://localhost:8080/api/parking-lots/report/occupancy
+
+6. Obtener el reporte de historial de ingresos y salidas:
+Método: 	GET
+URL: 		http://localhost:8080/api/vehicles/report/history
+
+7. Obtener el reporte de ingresos generados:
+Método: 	GET
+URL: 		http://localhost:8080/api/parking-lots/report/revenue
+
+Para usar estas peticiones:
+Iniciar la aplicación: Ejecuta el comando ./mvnw spring-boot:run en la terminal desde la carpeta raíz de tu proyecto.
+Crear parqueaderos, registrar entradas/salidas, obtener reportes: Utiliza una herramienta como Postman. Configura la URL, el método HTTP, los headers (generalmente Content-Type: application/json para las peticiones con cuerpo JSON), y el cuerpo si es necesario. Luego, haz clic en "Send".
